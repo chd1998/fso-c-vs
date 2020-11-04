@@ -1,0 +1,33 @@
+1. windows下编译cfitsio
+
+解压源代码至x:\cfitsio
+cd x:\cfitsio
+mkdir cfitsio.build
+cd cfitsio.build
+cmake.exe -G  "Visual Studio 16 2019"  ..\
+cmake.exe --build . --config Release
+
+2. 使用
+Using CFITSIO when compiling and linking application programs 
+
+First, depending on your particular programming environment, it may be
+necessary to copy the cfitsio.lib and cfitsio.dll files into another
+directory where your compiler expects to find them.  Or equivalently, you
+may need to specify the directory path to the location of the CFITSIO
+library files when creating a project that uses them.  You may also need to
+copy the fitsio.h and longnam.h include files from the \cfitsio source file
+directory to a standard 'include' directory on your system.
+
+When using the Visual Studio command line window, application programs can
+be compiled and linked with CFITSIO using the following command:
+
+		cl /MD your_program.c cfitsio.lib
+
+The /MD command line switch must be specified to force the compiler/linker
+to use the appropriate runtime library.   If this switch is omitted, then
+the fits_report_error function in CFITSIO will likely crash.  
+
+When building programs in the Visual Studio graphical environment, one can
+force the equivalent of the /MD switch by selecting 'Settings...' under the
+'Project' menu, then click on the C/C++ tab and select the 'Code Generator'
+category.  Then under 'User Run-time Library' select 'Multithreaded DLL'.
